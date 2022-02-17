@@ -52,7 +52,12 @@ export default {
         //表单的验证规则
         username: [
           { required: true, message: "用户名", trigger: "blur" },
-          {min: 3,max: 10,message: "长度在 3 到 10 个字符",trigger: "blur"},
+          {
+            min: 3,
+            max: 10,
+            message: "长度在 3 到 10 个字符",
+            trigger: "blur",
+          },
         ],
         password: [
           { required: true, message: "密码", trigger: "blur" },
@@ -63,17 +68,20 @@ export default {
   },
   methods: {
     login() {
-      this.$refs.loginRef.validate(async val=>{
-        //    console.log(val);
-           if(!val) return;
-           console.log(this.loginForm);
-         const res = await this.$http.post("login",this.loginForm);
-         console.log(res);
-      })
+      this.$refs.loginRef.validate(async valid =>{
+        if (!valid) return;
+        const {data: res} = await this.$http.post('login', this.loginForm);
+        if (res.meta.status !== 200) return this.$message.error("登陆失败!");
+        this.$message.success("登陆成功!");
+      // tokin 只应 在当前网站打开期间生效，所以将token保存在sessionStorage中
+       window.sessionStorage.setItem('token',res.data.token);
+      //通过编程式路由跳转到后台主页，路由地址是/home
+       this.$router.push('/home');
+      });
     },
     resetLogin() {
       this.$refs.loginRef.resetFields();
-    },
+    } 
   },
   components: {},
 };
