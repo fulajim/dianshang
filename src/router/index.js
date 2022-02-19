@@ -12,7 +12,7 @@ const routes = [
      path:'/login',
      component:()=>import('../components/Login.vue')
    },
-   {
+   { 
       path:'/home',
       redirect:'/welcome',
       component:()=>import('../components/Home.vue'),
@@ -24,7 +24,15 @@ const routes = [
         {
           path:'/users',
           component:()=>import('../components/user/Users.vue')
-        }
+        },
+        {
+          path:'/rights',
+          component:()=>import('../components/power/Rights.vue')
+        },
+        {
+          path:'/roles',
+          component:()=>import('../components/power/Roles.vue')
+        },
       ]
    },
    
