@@ -14,7 +14,7 @@ Vue.use(ElementUI);
 
 import axios from "axios";
 //配置请求的根路径import axios from 'axios'
-axios.defaults.baseURL = "http://106.12.6.169:8888/api/private/v1";
+axios.defaults.baseURL = "http://192.168.1.35:8888/api/private/v1/";
 axios.interceptors.request.use((config) => {
   config.headers.Authorization = window.sessionStorage.getItem("token");
   return config;

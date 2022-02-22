@@ -73,6 +73,7 @@ export default {
         const {data: res} = await this.$http.post('login', this.loginForm);
         if (res.meta.status !== 200) return this.$message.error("登陆失败!");
         this.$message.success("登陆成功!");
+       
       // tokin 只应 在当前网站打开期间生效，所以将token保存在sessionStorage中
        window.sessionStorage.setItem('token',res.data.token);
       //通过编程式路由跳转到后台主页，路由地址是/home

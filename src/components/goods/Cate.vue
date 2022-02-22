@@ -171,6 +171,7 @@ export default {
         value: "cat_id",
         label: "cat_name",
         children: "children",
+        expandTrigger: "hover"
       },
       //选中的父级分类的id数组
       selectedKeys: [],
@@ -178,7 +179,7 @@ export default {
   },
   created() {
     this.getCateList();
-  },
+  }, 
   methods: {
     async getCateList() {
       //获取商品分类数据
