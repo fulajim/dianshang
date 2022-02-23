@@ -51,7 +51,7 @@
                   <el-col :span="18">
                     <el-tag
                       closable
-                      v-for="(item3, i3) in item1.children"
+                      v-for="item3 in item1.children"
                       :key="item3.id"
                       type="warning"
                       @close="removRightId(scope.row, item3.id)"
@@ -61,10 +61,10 @@
                 </el-row>
               </el-col>
             </el-row>
-
+           <!-- 
             <pre>
               {{ scope.row }}
-            </pre>
+            </pre> -->
           </template>
         </el-table-column>
         <!-- 索引列 -->
@@ -114,9 +114,6 @@
         <el-button type="primary" @click="allotRights">确 定</el-button>
       </span>
     </el-dialog>
-
-
-    
   </div>
 </template>
    
@@ -208,18 +205,19 @@ export default {
         ...this.$refs.treeRef.getCheckedKeys(),
         ...this.$refs.treeRef.getHalfCheckedKeys(),
       ];
-      const idStr = keys.join(',');
+      const idStr = keys.join(",");
       const { data: res } = await this.$http.post(
         `roles/${this.roleId}/rights`,
-        { rids: idStr})
+        { rids: idStr }
+      );
 
-        if(res.meta.status !==200){
-          return this.$message.error('分配权限失败')
-        }
-        this.$message.success('分配权限成功')
-        
-        this.getRolesList()
-        this.setRightDialogVisible=false
+      if (res.meta.status !== 200) {
+        return this.$message.error("分配权限失败");
+      }
+      this.$message.success("分配权限成功");
+
+      this.getRolesList();
+      this.setRightDialogVisible = false;
     },
   },
   components: {},
